@@ -18,9 +18,9 @@ function Card({pokemon}) {
 
                    </h6>
                  } )}
-                 <button type="button" class="btn btn-danger">
+                 <button type="button" class="btn btn-warning">
                      <Link to={`/pokemon/${pokemon.id}`}>
-                         Más INFO
+                         Más información
                      </Link>
                  </button>
 

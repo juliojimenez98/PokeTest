@@ -9,6 +9,8 @@ import {
   Route,
 } from "react-router-dom";
 import { PokeInformacion } from './PokeInformacion';
+import buscarPokemon from './buscarPokemon';
+import Axios from 'axios';
 
 function App() {
 
@@ -18,9 +20,27 @@ function App() {
   const [anteriorPag, setAnteriorPag] = useState('');
   const [cargando, setCargando] = useState(true);
   const urlPokemons = 'https://pokeapi.co/api/v2/pokemon';
+  const [pokemon, setPokemon] = useState("pikachu");
+    const [pokeData, setPokeData] = useState([]);
+    const [pokemonType, setPokemonType] = useState("");
 
 
- 
+
+  const getPokemon = async () =>{
+    const toArray =[];
+    try {
+        const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+        const res = await Axios.get(url)
+        console.log("pikachu",res)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+useEffect(() => {
+    getPokemon();
+    
+}, [])
 
   
 
@@ -78,6 +98,7 @@ function App() {
           <Route path="/" exact>
                <div className="App">
                 <Navbar></Navbar>
+                <buscarPokemon/>
                 <br></br>
                 <button onClick={anterior} className="btn btn-info">Anterior</button>
                 <button onClick={siguiente} className="btn btn-danger">Siguiente</button>
@@ -100,6 +121,7 @@ function App() {
           </Route>
 
           <Route path="/pokemon/:id" exact>
+          <Navbar></Navbar>
             <PokeInformacion />
           </Route>
      </Switch>
